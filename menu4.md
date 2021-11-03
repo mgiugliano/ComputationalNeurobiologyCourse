@@ -1,11 +1,3 @@
-@def title = "Week 4"
-+++
-title = "Week 4"
-hascode = false
-date = Date(2021, 11, 3)
-rss = "This is **week** 4 of the course, where models of synaptic transmissions are introduced."
-+++
-@def tags = ["synapse", "kinetic scheme", "neuron", "epsp", "ipsp"]
 
 # Models of synaptic transmission (~3h)
 

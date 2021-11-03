@@ -1,12 +1,3 @@
-@def title = "Week 1"
-+++
-title = "Week 1"
-hascode = false
-date = Date(2021, 11, 3)
-rss = "This is **week** 1 of the course, where elementary math concepts are revisited and mathematical preliminaries are introduced."
-+++
-
-@def tags = ["math", "preliminaries"]
 
 # Mathematical refresher and preliminaries (~5h)
 

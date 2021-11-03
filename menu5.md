@@ -1,11 +1,3 @@
-@def title = "Week 5"
-+++
-title = "Week 5"
-hascode = false
-date = Date(2021, 11, 3)
-rss = "This is **week** 5 of the course, where models of networks are introduced."
-+++
-@def tags = ["mean-field", "population", "rate models", "attractor", "integrator"]
 
 # Simplified models of neuronal networks (~3h)
 

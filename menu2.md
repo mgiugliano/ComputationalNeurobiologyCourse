@@ -1,12 +1,3 @@
-@def title = "Week 2"
-+++
-title = "Week 2"
-hascode = false
-date = Date(2021, 11, 3)
-rss = "This is **week** 2 of the course, where first elements of neuroelectronics and of the (resting) membrane potential are introduced."
-+++
-
-@def tags = ["neuroelectronics", "biophysics", "ions", "membrane potential"]
 
 # Neuroelectronics (~4h) and Academic Writing (~30min)
 
