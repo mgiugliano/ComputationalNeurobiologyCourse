@@ -1,7 +1,14 @@
-@def title = "Week 3" +++ title = "Week 3" hascode = false date = Date(2021,
-11, 3) rss = "This is **week** 3 of the course, where the Hodgkin-Huxley and IF
-models of neuronal excitability are introduced." +++ @def tags =
-["hodgkin-huxley", "circuit model", "neuron", "action potential", "IF", "spike"]
++++ 
+title = "Week 3" 
+hascode = false 
+date = Date(2021, 11, 3) 
+rss = "This is
+**week** 3 of the course, where the Hodgkin-Huxley and IF models of neuronal
+excitability are introduced." 
++++
+
+@def tags = ["hodgkin-huxley", "circuit model", "neuron", "action potential",
+"IF", "spike"]
 
 # Hodgkin-Huxley & IF models of excitability (~4h + 1h) and Version Control (~30min)
 

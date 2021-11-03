@@ -4,22 +4,31 @@ hascode = false
 date = Date(2021, 11, 3)
 rss = "This is **week** 1 of the course, where elementary math concepts are revisited and mathematical preliminaries are introduced."
 +++
+
 @def tags = ["math", "preliminaries"]
 
 # Mathematical refresher and preliminaries (~5h)
 
-**Note:** The overheads are available [here](https://github.com/mgiugliano/ComputationalNeurobiologyCourse/tree/main/overheads/MathPreliminaries) for download.
-
+**Note:** The overheads are available
+[here](https://github.com/mgiugliano/ComputationalNeurobiologyCourse/tree/main/overheads/MathPreliminaries)
+for download.
 
 \toc
 
-The first module of the course is optional and delivered as "online-only" material. It refreshes elementary mathematical concepts, which you should already be familiar with from high-school and from the first years of your undergraduate training. It also introduces preliminary math tools, which will become relevant during the second part of the course. 
+The first module of the course is optional and delivered as "online-only"
+material. It refreshes elementary mathematical concepts, which you should
+already be familiar with from high-school and from the first years of your
+undergraduate training. It also introduces preliminary math tools, which will
+become relevant during the second part of the course.
 
+Videos and learning material have been made available to you in advance, for
+your self-paced independent learning. A total of 5 hours have been booked on the
+course calendar during the first week, so that you do have official scheduled
+time to watch and study the videos, and play with the interactive examples.
 
-Videos and learning material have been made available to you in advance, for your self-paced independent learning. A total of 5 hours have been booked on the course calendar during the first week, so that you do have official scheduled time to watch and study the videos, and play with the interactive examples.
-
-
-Below you find the table of content, with the individual videos. Note that videos have been "split" into three parts (i.e. part A, part B, and part C), and further decomposed in smaller "bits" you should be able to digest easily.
+Below you find the table of content, with the individual videos. Note that
+videos have been "split" into three parts (i.e. part A, part B, and part C), and
+further decomposed in smaller "bits" you should be able to digest easily.
 
 ## Part A: mathematical _functions_
 
@@ -37,7 +46,6 @@ Below you find the table of content, with the individual videos. Note that video
 
 {{youtube Mod1_PartA3}}
 
-
 ## Part B: Derivatives and Integrals
 
 ### Intuition for _derivatives_ and elementary functions
@@ -47,7 +55,6 @@ Below you find the table of content, with the individual videos. Note that video
 ### Indefinite and definite integrals
 
 {{youtube Mod1_PartB2}}
-
 
 ## Part C: Mathematical Preliminaries
 
@@ -79,7 +86,6 @@ Below you find the table of content, with the individual videos. Note that video
 
 - [Pluto.jl interactive notebook on the Euler's method](../notebooks/OrdinaryDifferentialEquation/)
 
-
 #### The Euler's forward method
 
 {{youtube Mod1_PartC8}}
@@ -87,5 +93,3 @@ Below you find the table of content, with the individual videos. Note that video
 #### Taylor's expansion and comparison with the analytical solution
 
 {{youtube Mod1_PartC9}}
-
-
