@@ -1,5 +1,5 @@
 @def title="Week 3"
- 
+
 # Hodgkin-Huxley & IF models of excitability (~4h + 1h) and Version Control (~30min)
 
 **Note:** The overheads are available
@@ -17,6 +17,8 @@ for download.
 ### (Thevenin’s reduced) circuit model, for non-excitable cells
 
 ### exercise: response to an external current step
+
+- [Pluto.jl interactive notebook on the passive membrane model](../notebooks/Passive/)
 
 {{youtube HH_1}}
 

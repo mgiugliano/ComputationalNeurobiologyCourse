@@ -17,6 +17,8 @@
 
 {{youtube SYN_3}}
 
+- [Pluto.jl interactive notebook on the model of homosynaptic plasticity](../notebooks/TsodyksMarkram/)
+
 ## Simplifying the model
 
 ### Removing receptor saturation
