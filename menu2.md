@@ -1,3 +1,4 @@
+@def title="Week 2"
 
 # Neuroelectronics (~4h) and Academic Writing (~30min)
 

@@ -1,3 +1,4 @@
+@def title="Week 1"
 
 # Mathematical refresher and preliminaries (~5h)
 

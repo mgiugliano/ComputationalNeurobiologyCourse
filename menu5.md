@@ -1,3 +1,4 @@
+@def title="Week 5"
 
 # Simplified models of neuronal networks (~3h)
 

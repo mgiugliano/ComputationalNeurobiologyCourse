@@ -1,4 +1,5 @@
-
+@def title="Week 3"
+ 
 # Hodgkin-Huxley & IF models of excitability (~4h + 1h) and Version Control (~30min)
 
 **Note:** The overheads are available
@@ -31,7 +32,7 @@ for download.
 
 ## Full Hodgkin-Huxley model
 
-- [Pluto.jl interactive notebook on the Hodgkin-Huxley model](../notebooks/HodkingHuxley/)
+- [Pluto.jl interactive notebook on the Hodgkin-Huxley model](../notebooks/HodgkinHuxley/)
 
 {{youtube HH_4}}
 

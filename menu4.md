@@ -1,3 +1,4 @@
+@def title="Week 4"
 
 # Models of synaptic transmission (~3h)
 
