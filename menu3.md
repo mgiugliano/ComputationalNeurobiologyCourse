@@ -41,19 +41,19 @@ for download.
 {{youtube HH_5}}
 
 
-# The Integrate-and-Fire model of excitability
+## The Integrate-and-Fire model of excitability
 
-## Simplifying the description of APs
+### Simplifying the description of APs
 
 {{youtube IF_1}}
 
 - [Pluto.jl interactive notebook on the leaky IF model](../notebooks/IF/)
 
-## The Frequency-Current formula for the IF
+### The Frequency-Current formula for the IF
 
 {{youtube IF_2}}
 
-## The IF model with spike-frequency adaptation
+### The IF model with spike-frequency adaptation
 
 {{youtube IF_3}}
 

@@ -87,7 +87,7 @@ further decomposed in smaller "bits" you should be able to digest easily.
 
 {{youtube Mod1_PartC9}}
 
-#### Resources and Links
+## Resources and Links
 
 - [Khan academy on Calculus](https://www.khanacademy.org/math/calculus-1)
 - [Plotting functions on the web](http://www.fooplot.com/)

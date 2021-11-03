@@ -6,28 +6,28 @@
 
 \toc
 
-## Electrical Synaptic Transmission 
+## Electrical Transmission 
 
 {{youtube SYN_1}}
 
-## Chemical Synaptic Transmission and Ionotropic and Metabotropic Receptors
+## Chemical Transmission, Ionotropic/Metabotropic Receptors
 {{youtube SYN_2}}
 
-## Kinetic schemes for modelling synaptic receptors
+## Kinetic schemes and models of synaptic receptors
 
 {{youtube SYN_3}}
 
 - [Pluto.jl interactive notebook on the model of homosynaptic plasticity](../notebooks/TsodyksMarkram/)
 
-## Simplifying the model
+## Further simplifying the models
 
 ### Removing receptor saturation
 
-### Current-driven instead of conductance-driven synapses
+### Current-driven vs. conductance-driven synapses
 
 {{youtube SYN_4}}
 
-## Mean-field descriptions
+## Mean-field descriptions of large homogeneous networks
 {{youtube SYN_5}}
 
 

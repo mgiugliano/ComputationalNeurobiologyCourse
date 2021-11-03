@@ -24,19 +24,19 @@ for download. \toc
 
 {{youtube Neuroelectronics_5}}
 
-### Nernst's equilibrium potential
+## Nernst's equilibrium potential
 
 {{youtube Neuroelectronics_6}}
 
-### Non-equilibrium
+## Non-equilibrium
 
 {{youtube Neuroelectronics_7}}
 
-### The origin of the membrane potential
+## The origin of the membrane potential
 
 {{youtube Neuroelectronics_8}}
 
-### References
+## References
 
 - [Cell biophysics vol 1 (book)](https://www.amazon.it/Cellular-Biophysics-Thomas-Fischer-Weiss/dp/0262527766)
 - [Cell biophysics vol 2 (book)](https://www.amazon.it/Cellular-Biophysics-Electrical-Properties-2/dp/0262529572)
@@ -51,7 +51,7 @@ for download.
 
 {{youtube acadWriting}}
 
-### Resources and links
+## Resources and links
 
 - [The Markdown Guide](https://www.markdownguide.org)
 - [Visual Studio Code Editor](https://code.visualstudio.com)
