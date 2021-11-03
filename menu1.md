@@ -23,6 +23,9 @@ Below you find the table of content, with the individual videos. Note that video
 
 ## Part A: mathematical _functions_
 
+- {{insert ../PlutoNotebooks/Functions_of_one_variable.html}}
+- [Pluto.jl interactive notebook on Math Functions](../PlutoNotebooks/Functions_of_one_variable.html)
+
 - [Pluto.jl interactive notebook on Math Functions](https://raw.githubusercontent.com/mgiugliano/ComputationalNeurobiologyCourse/main/PlutoNotebooks/Functions_of_one_variable.html)
 
 ### Functions and their _graph_
