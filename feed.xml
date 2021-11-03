@@ -80,25 +80,6 @@
 
 <item>
   <title>
-    <![CDATA[  Week 3  ]]>
-  </title>
-  <link> https://mgiugliano.github.io/ComputationalNeurobiologyCourse/menu3/index.html </link>
-  <guid> https://mgiugliano.github.io/ComputationalNeurobiologyCourse/menu3/index.html </guid>
-  <description>
-    <![CDATA[  This is <strong>week</strong> 3 of the course, where the Hodgkin-Huxley and IF models of neuronal excitability are introduced.  ]]>
-  </description>  
-    
-  <pubDate>Wed, 03 Nov 2021 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Michele GIUGLIANO</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
     <![CDATA[  Week 2  ]]>
   </title>
   <link> https://mgiugliano.github.io/ComputationalNeurobiologyCourse/menu2/index.html </link>

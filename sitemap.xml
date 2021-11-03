@@ -44,12 +44,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://mgiugliano.github.io/ComputationalNeurobiologyCourse/menu3/index.html</loc>
-    <lastmod>2021-11-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://mgiugliano.github.io/ComputationalNeurobiologyCourse/menu2/index.html</loc>
     <lastmod>2021-11-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -62,6 +56,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://mgiugliano.github.io/ComputationalNeurobiologyCourse/notebooks/HodgkinHuxley/</loc>
+    <lastmod>2021-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://mgiugliano.github.io/ComputationalNeurobiologyCourse/notebooks/Functions_of_one_variable/</loc>
     <lastmod>2021-11-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -69,6 +69,12 @@
 </url>
 <url>
     <loc>https://mgiugliano.github.io/ComputationalNeurobiologyCourse/notebooks/OrdinaryDifferentialEquation/</loc>
+    <lastmod>2021-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://mgiugliano.github.io/ComputationalNeurobiologyCourse/notebooks/IF/</loc>
     <lastmod>2021-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
