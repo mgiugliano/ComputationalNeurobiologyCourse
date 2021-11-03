@@ -23,7 +23,7 @@ Below you find the table of content, with the individual videos. Note that video
 
 ## Part A: mathematical _functions_
 
-- [Pluto.jl interactive notebook on Math Functions](notebooks/Functions_of_one_variable)
+- [Pluto.jl interactive notebook on Math Functions](../notebooks/Functions_of_one_variable)
 
 ### Functions and their _graph_
 
@@ -77,7 +77,7 @@ Below you find the table of content, with the individual videos. Note that video
 
 ### Numerical solutions
 
-- [Pluto.jl interactive notebook on the Euler's method](notebooks/OrdinaryDifferentialEquation/)
+- [Pluto.jl interactive notebook on the Euler's method](../notebooks/OrdinaryDifferentialEquation/)
 
 
 #### The Euler's forward method
