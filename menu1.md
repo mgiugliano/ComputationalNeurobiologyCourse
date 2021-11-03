@@ -23,10 +23,7 @@ Below you find the table of content, with the individual videos. Note that video
 
 ## Part A: mathematical _functions_
 
-- {{insert ../PlutoNotebooks/Functions_of_one_variable.html}}
-- [Pluto.jl interactive notebook on Math Functions](../PlutoNotebooks/Functions_of_one_variable.html)
-
-- [Pluto.jl interactive notebook on Math Functions](https://raw.githubusercontent.com/mgiugliano/ComputationalNeurobiologyCourse/main/PlutoNotebooks/Functions_of_one_variable.html)
+- [Pluto.jl interactive notebook on Math Functions](Functions_of_one_variable.html)
 
 ### Functions and their _graph_
 
@@ -80,7 +77,7 @@ Below you find the table of content, with the individual videos. Note that video
 
 ### Numerical solutions
 
-- [Pluto.jl interactive notebook on the Euler's method](https://raw.githubusercontent.com/mgiugliano/ComputationalNeurobiologyCourse/main/PlutoNotebooks/OrdinaryDifferentialEquation.html)
+- [Pluto.jl interactive notebook on the Euler's method](OrdinaryDifferentialEquation.html)
 
 
 #### The Euler's forward method
