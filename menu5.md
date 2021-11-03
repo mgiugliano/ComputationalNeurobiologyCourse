@@ -30,3 +30,7 @@
 {{youtube Rate_6}}
 
 
+## References
+
+- [Principles of Computational Modelling (book)](https://www.amazon.it/Principles-Computational-Modelling-Neuroscience-Sterratt/dp/0521877954)
+- [Neuronal Dynamics (book)](https://www.amazon.it/Neuronal-Dynamics-Neurons-Networks-Cognition/dp/1107635195)

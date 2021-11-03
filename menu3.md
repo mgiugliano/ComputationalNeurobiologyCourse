@@ -40,6 +40,7 @@ for download.
 
 {{youtube HH_5}}
 
+
 # The Integrate-and-Fire model of excitability
 
 ## Simplifying the description of APs
@@ -56,6 +57,17 @@ for download.
 
 {{youtube IF_3}}
 
+
+
+## References
+
+- [The Annotated Hodgkin and Huxley (book)](https://press.princeton.edu/books/paperback/9780691220635/the-annotated-hodgkin-and-huxley)
+- [Lapicque’s 1907 paper: from frogs to integrate-and-fire (paper)](https://link.springer.com/article/10.1007%2Fs00422-007-0190-0)
+- [Principles of Computational Modelling (book)](https://www.amazon.it/Principles-Computational-Modelling-Neuroscience-Sterratt/dp/0521877954)
+- [Neuronal Dynamics (book)](https://www.amazon.it/Neuronal-Dynamics-Neurons-Networks-Cognition/dp/1107635195)
+
+
+
 ## On Version Control
 
 **Note:** The overheads are available
@@ -63,3 +75,10 @@ for download.
 for download.
 
 {{youtube verControl}}
+
+### Resources and links
+
+- [Git Hub](https://github.com)
+- [Git Kraken](https://www.gitkraken.com)
+- [GitHub Desktop](https://desktop.github.com)
+- [Git and GitHub "for poets" video series](https://youtu.be/BCQHnlnPusY)

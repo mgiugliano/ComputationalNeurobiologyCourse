@@ -36,6 +36,13 @@ for download. \toc
 
 {{youtube Neuroelectronics_8}}
 
+### References
+
+- [Cell biophysics vol 1 (book)](https://www.amazon.it/Cellular-Biophysics-Thomas-Fischer-Weiss/dp/0262527766)
+- [Cell biophysics vol 2 (book)](https://www.amazon.it/Cellular-Biophysics-Electrical-Properties-2/dp/0262529572)
+
+
+
 ## On Academic Writing
 
 **Note:** The overheads are available
@@ -43,3 +50,17 @@ for download. \toc
 for download.
 
 {{youtube acadWriting}}
+
+### Resources and links
+
+- [The Markdown Guide](https://www.markdownguide.org)
+- [Visual Studio Code Editor](https://code.visualstudio.com)
+- [Sublime Text Editor](http://sublimetext.com)
+- [Zettlr Editor](http://zettlr.com)
+- [Pandoc](https://pandoc.org)
+- [A template for working with Pandoc and GitHub](https://github.com/mgiugliano/manuscript_template)
+- [Zotero](https://www.zotero.org)
+- [JabRef](https://www.jabref.org)
+- [BibTeX](http://www.bibtex.org)
+- [Chocolatey - Package manager for Windows](http://chocolatey.org)
+- [Home Brew - Package manager for macOs](https://brew.sh)

@@ -86,3 +86,13 @@ further decomposed in smaller "bits" you should be able to digest easily.
 #### Taylor's expansion and comparison with the analytical solution
 
 {{youtube Mod1_PartC9}}
+
+#### Resources and Links
+
+- [Khan academy on Calculus](https://www.khanacademy.org/math/calculus-1)
+- [Plotting functions on the web](http://www.fooplot.com/)
+- [Infinite powers (book)](https://www.amazon.it/Infinite-Powers-Calculus-Language-Universe/dp/1786492970)
+- [Joy of X (book)](https://www.amazon.it/Joy-Guided-Tour-Mathematics-Infinity/dp/1848878451)
+- [Calculus for Dummies (book)](https://www.amazon.it/Calculus-Dummies-Math-Science/dp/1119293499)
+- [Calculus for Dummies 2 (book)](https://www.amazon.it/Calculus-II-Dummies-Mark-Zegarelli/dp/111816170X)
+- [Statistics for terrified biologists (book)](https://www.amazon.it/Statistics-Terrified-Biologists-Helmut-Emden/dp/1405149566)
