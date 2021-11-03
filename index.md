@@ -1,12 +1,12 @@
 @def title = "Computational Neurobiology"
-@def tags = ["SISSA", "PhD course", "Neurobiology", "Neuroscience"]
+@def tags = ["SISSA", "PhD course", "Neurobiology", "Neuroscience", "Trieste"]
 
 # Welcome!
 {{youtube intro}}
 
 [Michele GIUGLIANO](https://www.giugliano.info/cv) lectures on _Computational Neurobiology_, during the winter semester of the first year PhD course at [SISSA](http://phdneurobiology.sissa.it).
 
-This website provides material and online resources for the course, which is meant as a graduate introduction to the biophysics of excitable membranes and to elementary quantitative neuronal modelling, mostly at the cell levels. These are elements any researcher in Neuroscience should have a solid grasp of, especially today where large-scale initiatives are launched world-wide to dissect cells, networks, systems, and behavior with a multidisciplinary approach, where computational neuroscience is a key tool besides _wet_ experimental techniques. 
+This website provides material and online resources for the course, which is meant as a graduate introduction to the biophysics of excitable membranes and to elementary quantitative neuronal modelling, mostly at the cell levels. These are elements any researcher in Neuroscience should have a solid grasp of, especially today where large-scale initiatives are launched world-wide to dissect cells, networks, systems, and behavior with a multidisciplinary approach, where computational neuroscience is a key tool besides _wet_ experimental techniques.
 
 The various topics of the course are presented with in mind a non-specialist audience, rather at ease with neurobiology but inexperienced in the quantitative language of biophysics, modelling, and unaware of modenr computational approaches in Neuroscience.
 
