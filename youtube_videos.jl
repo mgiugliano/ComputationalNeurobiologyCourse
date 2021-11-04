@@ -46,4 +46,5 @@ videos = Dict(
     "Rate_4" => "RbFXpJfRIes",
     "Rate_5" => "rk2Jo525eSU",
     "Rate_6" => "rcf-ehEEwAQ",
+    "installJulia" => "OOjKEgbt8AI",
 )
