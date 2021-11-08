@@ -4,6 +4,7 @@
 
 - [Pluto.jl interactive notebook on the Euler's method](../notebooks/OrdinaryDifferentialEquation/)
 - [Pluto.jl interactive notebook on Math Functions](../notebooks/Functions_of_one_variable)
+- [Pluto.jl interactive notebook on simplified calcium dynamics](../notebooks/CaDynamics/)
 - [Pluto.jl interactive notebook on the passive membrane model](../notebooks/Passive/)
 - [Pluto.jl interactive notebook on the Hodgkin-Huxley model](../notebooks/HodgkinHuxley/)
 - [Pluto.jl interactive notebook on the leaky IF model](../notebooks/IF/)
