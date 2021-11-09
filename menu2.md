@@ -20,6 +20,10 @@ for download. \toc
 
 {{youtube Neuroelectronics_3}}
 
+### Selective permeability and membrane semi-permeability
+
+{{youtube Neuroelectronics_4}}
+
 ### Flux of particles through space
 
 {{youtube Neuroelectronics_5}}
