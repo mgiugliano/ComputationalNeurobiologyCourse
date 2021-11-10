@@ -7,6 +7,7 @@
 - [Pluto.jl interactive notebook on simplified calcium dynamics](../notebooks/CalciumDynamics/)
 - [Pluto.jl interactive notebook on the passive membrane model](../notebooks/Passive/)
 - [Pluto.jl interactive notebook on the Hodgkin-Huxley model](../notebooks/HodgkinHuxley/)
+- [Pluto.jl interactive notebook on the stochastic Hodgkin-Huxley model](../notebooks/StochasticHH/)
 - [Pluto.jl interactive notebook on the leaky IF model](../notebooks/IF/)
 - [Pluto.jl interactive notebook on the model of homosynaptic plasticity](../notebooks/TsodyksMarkram/)
 

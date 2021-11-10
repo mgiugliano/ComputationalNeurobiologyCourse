@@ -35,6 +35,7 @@ for download.
 ## Full Hodgkin-Huxley model
 
 - [Pluto.jl interactive notebook on the Hodgkin-Huxley model](../notebooks/HodgkinHuxley/)
+- [Pluto.jl interactive notebook on the stochastic Hodgkin-Huxley model](../notebooks/StochasticHH/)
 
 {{youtube HH_4}}
 
