@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.16.4
+# v0.17.1
 
 using Markdown
 using InteractiveUtils
@@ -7,8 +7,9 @@ using InteractiveUtils
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
     quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
 end
@@ -29,15 +30,20 @@ While the kinetic description for $n$, $m$, and $h$ remain the same, the charge 
 
 $C \frac{dV(t)}{dt}\ = \ G_{leak} (E_{leak} - V) + G_{Na} (m^3 h + \xi) (E_{Na} - V) + G_{K} (n^4 + \eta) (E_{K} - V) + I\\$
 
-As discussed in class, $\xi$ and $\eta$ are appropriate *stochastic processes*, capable of capturing with **a reduced computational load** the random opening and closing of individual ion channels. 
+As discussed in class, $\xi$ and $\eta$ are realisations of appropriate *stochastic processes*, capable of capturing (with **reduced computational load**) the random opening and closing of individual ion channels and its inherent voltage-dependence. 
 
-We explore interactively what happens to the membrane potential for increasing values of the external current $I$ and how the model respond to idenical square current pulses.
+We explore interactively what happens to the membrane potential for increasing values of the external current $I$ and how the model respond to a square current pulse.
 """
 
 # ╔═╡ b3200f5a-ab7a-4503-bf4c-f92ec6ce31a8
-md""" ### Play with the amplitude of the external current $I$
+md""" ### Play with $I$ and with presence/absence of channel noise
+I = $(@bind I Slider(-0.18:0.01:0.5, default=-0.135, show_value=true))
 
-I = $(@bind I Slider(-0.18:0.01:0.5, default=-0.135, show_value=true))"""
+**Noise (ON/OFF):** $(@bind noiseON CheckBox(default=true))
+"""
+
+# ╔═╡ 295d851f-61b3-43a7-86d3-42f3f72db666
+@bind xbtn html"<input type=button value='Repeat the simulation'>"
 
 # ╔═╡ dc8f4054-2c94-4373-8728-9f84291841f4
 md"""
@@ -46,7 +52,7 @@ The larger $I$, the higher the frequency of generated action potentials.
 
 # ╔═╡ 3e535bd3-b58c-4dfd-9749-070699aee0c3
 begin
-		
+ xbtn;
  T      = 300.;    # Maximal lifetime of the simulation [ms]
  Δt     = 0.01;    # Integration time step [ms] - WATCH OUT! DO NOT INCREASE!
  
@@ -55,13 +61,87 @@ begin
  gkmax  = 0.36;    # Max (specific) potassium conductance [mS/mm^2]
  gl     = 0.003;   # Max (specific) leak conductance [mS/mm^2]
 
+ gamma_na = 10     # (pS) single chan. Na conductance
+ gamma_k  = 10     # (pS) single chan. K conductance
+
+ Nna    = 1000
+ Nk     = 1000
+	
  Ena    = 50.;     # Reversal potential for sodium currents [mV]
  Ek     = -77.;    # Reversal potential for potassium currents [mV]
  El     = -54.387; # Reversal potential for leak currents [mV]
 
  time = 0:Δt:T;        # Array containg the "time" axis [ms]
  N    = length(time);  # Length of "time", i.e. how many discrete time steps
- 
+
+
+	
+function rates(V)	
+	αm = 0.1 * (V+40.) / (1. - exp(-(V+40.)/10.))
+    βm  = 4. * exp(-0.0556 * (V+65))
+	m∞ = αm / (αm + βm)
+	τm = 1. / (αm + βm)
+	m3∞ = m∞ ^ 3
+	one_minus_m∞ = 1. - m∞
+		
+    αh = 0.07 * exp(-0.05*(V+65.))
+    βh = 1. / (1. + exp(-0.1*(V+35.)))
+	h∞ = αh / (αh + βh)
+	τh = 1. / (αh + βh)
+	one_minus_h∞ = 1. - h∞
+
+    τz1 = τh
+    τz2 = τm
+    τz3 = τm / 2
+    τz4 = τm / 3
+    τz5 = τm * τh / (τm + τh)
+    τz6 = τm * τh / (τm + 2 * τh)
+    τz7 = τm * τh / (τm + 3 * τh)
+	
+	var_z1 = 1.0 / Nna * m3∞ * m3∞ * h∞ * one_minus_h∞
+    var_z2 = 3.0 / Nna * m3∞ * m∞  * m∞ * h∞ * h∞ * one_minus_m∞
+    var_z3 = 3.0 / Nna * m3∞ * m∞  * h∞ * h∞ * one_minus_m∞ * one_minus_m∞
+    var_z4 = 1.0 / Nna * m3∞ * h∞  * h∞ * one_minus_m∞ * one_minus_m∞ * one_minus_m∞
+    var_z5 = 3.0 / Nna * m3∞ * m∞  * m∞ * h∞ * one_minus_m∞ * one_minus_h∞
+    var_z6 = 3.0 / Nna * m3∞ * m∞  * h∞ * one_minus_m∞ * one_minus_m∞ * one_minus_h∞
+    var_z7 = 1.0 / Nna * m3∞ * h∞  * one_minus_m∞ * one_minus_m∞ * one_minus_m∞ * one_minus_h∞
+    
+    τz = (var_z1 + var_z2 + var_z3 + var_z4 + var_z5 + var_z6 + var_z7) / (var_z1 / τz1 + var_z2 / τz2 + var_z3 / τz3 + var_z4 / τz4 + var_z5 / τz5 + var_z6 / τz6 + var_z7 / τz7)
+    var_z = 1.0 / Nna * m3∞ * h∞ * (1.0 - m3∞ * h∞)
+		
+	# Exact
+    μz = exp(-Δt/τz)
+    noise_z = sqrt(var_z * (1-μz^2)) * randn()
+    # Euler-Maruyama
+    # noise_z = sqrt(2 * Δt * var_z / τz) * randn()
+
+	αn = 0.01 * (V+55) / (1. - exp(-(V+55.)/10.))
+    βn = 0.125 * exp(-(V+65.)/80.)
+	n∞ = αn / (αn + βn)
+	τn = 1. / (αn + βn)
+	n4∞ = n∞ ^ 4
+	one_minus_n∞ = 1. - n∞
+		
+	var_y1 = 4.0 / Nk * n4∞ * n∞ * n∞ * n∞ * one_minus_n∞
+    var_y2 = 6.0 / Nk * n4∞ * n∞ * n∞ * one_minus_n∞ * one_minus_n∞
+    var_y3 = 4.0 / Nk * n4∞ * n∞ * one_minus_n∞ * one_minus_n∞ * one_minus_n∞
+    var_y4 = 1.0 / Nk * n4∞ * one_minus_n∞ * one_minus_n∞ * one_minus_n∞ * one_minus_n∞
+
+    τy = (var_y1 + var_y2 + var_y3 + var_y4) / (var_y1 / τn + var_y2 / τn / 2 + var_y3 / τn/3 + var_y4/τn/4)
+    var_y = 1.0 / Nk * n4∞ * (1.0 - n4∞)
+    
+	# Exact
+    μy = exp(-Δt/τy)
+    noise_y = sqrt(var_y * (1-μy*μy)) * randn()
+    # Euler-Maruyama
+    #noise_y = sqrt(2 * Δt * var_y / τy) * randn()
+		
+	return αm, βm, αn, βn, αh, βh, μy, noise_y, μz, noise_z
+end
+
+	
+
+	
 	
 function HH(I)
     W    = zeros(N,1)  # Array containing V as the time goes by
@@ -69,15 +149,10 @@ function HH(I)
     
     # Initial conditions:
     V      = El
-    αm = 0.1 * (V+40.) / (1. - exp(-(V+40.)/10.))
-    βm  = 4. * exp(-0.0556 * (V+65))
+	yy     = 0.
+	zz     = 0.
+ 	αm, βm, αn, βn, αh, βh, _, _, _, _ = rates(V)	
 
-    αn = 0.01 * (V+55) / (1. - exp(-(V+55.)/10.))
-    βn = 0.125 * exp(-(V+65.)/80.)
-
-    αh = 0.07 * exp(-0.05*(V+65.))
-    βh = 1. / (1. + exp(-0.1*(V+35.)))
-    
     m      = αm / (αm + βm)
     h      = αh / (αh + βh) 
     n      = αn / (αn + βn) 
@@ -88,24 +163,43 @@ function HH(I)
     for k=1:N # Loop over each discrete step for time t
 			
      # Kinetic rates are expressed in msec
-     αm = 0.1 * (V + 40.) / (1. - exp(-(V + 40.) / 10.))
-     βm  = 4. * exp(-0.0556 * (V + 65))
-
-     αn = 0.01 * (V + 55) / (1. - exp(-(V + 55.)/10.))
-     βn = 0.125 * exp(-(V + 65.) / 80.)
-
-     αh = 0.07 * exp(-0.05*(V + 65.))
-     βh = 1. / (1. + exp(-0.1*(V + 35.)))
+ 	 αm, βm, αn, βn, αh, βh, μy, noise_y, μz, noise_z = rates(V)	
 
      n     = n + Δt * (αn * (1-n) - βn * n)     # Euler forward method   
      m     = m + Δt * (αm * (1-m) - βm * m)     # Euler forward method  
      h     = h + Δt * (αh * (1-h) - βh * h)     # Euler forward method  
 
-     Ina   = gnamax * m^3 * h * (Ena - V)       # By definition
-     Ik    = gkmax  * n^4 * (Ek - V)			# By definition
-     Ileak = gl     * (El - V)					# By definition
+	 m = (m > 1) ? 1 : m
+	 m = (m < 0) ? 0 : m
+	 h = (h > 1) ? 1 : h
+	 h = (h < 0) ? 0 : h
+	 n = (n > 1) ? 1 : n
+	 n = (n < 0) ? 0 : n
+
+
+	 if noiseON
+		 # Exact
+		 yy    = yy * μy + noise_y
+		 zz    = zz * μz + noise_z
+
+	     # Euler-Maruyama
+	     #yy = yy - dt * yy / tau_y + noise_y
+ 	    #zz = zz - dt * zz / tau_z + noise_z
+	 else
+		 yy = 0
+		 zz = 0
+	 end
+	
+	 GNA = gnamax * (m^3 * h + zz)
+	 GK  = gkmax  * (n^4 + yy)
+	 GNA = (GNA < 0) ? 0 : GNA		
+	 GK  = (GK < 0) ? 0 : GK		
+
+     Ina   = GNA * (Ena - V)    # By definition
+     Ik    = GK  * (Ek - V)	    # By definition
+     Ileak = gl  * (El - V)		# By definition
 			
-     V     = V + Δt/C * (Ina + Ik + Ileak + I)  # Euler forward method
+     V     = V + Δt/C * (Ina + Ik + Ileak + I[k])  # Euler forward method
             
      W[k]  = V; # Let's write the current V inside a new element of W[]
             
@@ -126,79 +220,14 @@ function HH(I)
 
 	
 	
-	
-	function HH2(Iext)
-    W    = zeros(N,1)  # Array containing V as the time goes by
-    Nspikes = 0        # Counter for the number of spikes 
-    
-    # Initial conditions:
-    V      = El
-    αm = 0.1 * (V+40.) / (1. - exp(-(V+40.)/10.))
-    βm  = 4. * exp(-0.0556 * (V+65))
-
-    αn = 0.01 * (V+55) / (1. - exp(-(V+55.)/10.))
-    βn = 0.125 * exp(-(V+65.)/80.)
-
-    αh = 0.07 * exp(-0.05*(V+65.))
-    βh = 1. / (1. + exp(-0.1*(V+35.)))
-    
-    m      = αm / (αm + βm)
-    h      = αh / (αh + βh) 
-    n      = αn / (αn + βn) 
-    
-    tmp    = 0        # For the peak detection    
-        
-    # Euler method ---------------------------------------------------------------
-    for k=1:N # Loop over each discrete step for time t
-			
-     # Kinetic rates are expressed in msec
-     αm = 0.1 * (V + 40.) / (1. - exp(-(V + 40.) / 10.))
-     βm  = 4. * exp(-0.0556 * (V + 65))
-
-     αn = 0.01 * (V + 55) / (1. - exp(-(V + 55.)/10.))
-     βn = 0.125 * exp(-(V + 65.) / 80.)
-
-     αh = 0.07 * exp(-0.05*(V + 65.))
-     βh = 1. / (1. + exp(-0.1*(V + 35.)))
-
-     n     = n + Δt * (αn * (1-n) - βn * n)     # Euler forward method   
-     m     = m + Δt * (αm * (1-m) - βm * m)     # Euler forward method  
-     h     = h + Δt * (αh * (1-h) - βh * h)     # Euler forward method  
-
-     Ina   = gnamax * m^3 * h * (Ena - V)       # By definition
-     Ik    = gkmax  * n^4 * (Ek - V)			# By definition
-     Ileak = gl     * (El - V)					# By definition
-			
-     V     = V + Δt/C * (Ina + Ik + Ileak + Iext[k])  # Euler forward method
-            
-     W[k]  = V; # Let's write the current V inside a new element of W[]
-            
-     if (tmp==0) && (V>-10)     # Detection of a "peak", with positive derivative
-        tmp = 1;                
-        Nspikes = Nspikes + 1;
-     elseif (tmp==1) && (V<-10) # if negative derivative, ignore it
-        tmp = 0;
-     end #if
-            
-    end # for
-    # ----------------------------------------------------------------------------
-
-    freq = round(1000. * Nspikes / T) 
-    
-    return W, freq    
- end
-
-
 end
 
 # ╔═╡ 8f6fcc70-5d00-41df-9c8b-8550375d8be3
 begin
-
-	W, freq = HH(I)
+    Istim = I .* ones(N,1)
+	W, freq = HH(Istim)
     
     mystr = "AP frequency: $(freq) Hz" # This is a string for the graph legend
-
-	Wanalyt = (-I/gl) * exp.(-time*gl/C) + (I/gl+El) * ones(N,1)
 	
 	# Plotting instructions ------------------------------------------------------		
 	plot(time, W, 
@@ -208,12 +237,6 @@ begin
 		#leg = :false
 		title = mystr);   # Numerical sol. 
 
-	plot!(time, Wanalyt, 
-		label="Analytical solution (of a RC)", 
-		color = :blue,
-		linewidth = 1,
-		leg = :true);   # Analytical sol. of a RC compartment 
-
 	xlims!((0, 150))
  	ylims!((-100,30))
 
@@ -222,65 +245,35 @@ begin
 	
 end
 
-# ╔═╡ 78194388-b1e3-4c8b-879e-388cb2cdd486
-md""" ### Explore absolute and relative refractoryness
-I0 = $(@bind I0 Slider(0:0.05:20, default=0, show_value=true))
-"""
-
-# ╔═╡ 1335790e-5e5d-450d-8551-b2314e1436ce
-md"""
-I1 = $(@bind I1 Slider(0:0.05:20, default=0, show_value=true))
-"""
-
-# ╔═╡ db58af96-8fd8-4c24-b788-34f8ceb8e733
-md"""
-T = $(@bind T0 Slider(Δt:Δt:50, default=30, show_value=true))
-"""
-
-# ╔═╡ e9bc7a10-ad8d-4acb-8099-f2e4f2c77d67
+# ╔═╡ 839a5028-e70e-4144-9f15-b89b72f59d87
 begin
-	
-	delay = 10.
-
-    i1 = 0:Δt:delay
-    i2 = (i1[end] + Δt):Δt:(i1[end] + Δt + 2*Δt)
-	i3 = (i2[end] + Δt):Δt:(i2[end] + Δt + T0)
-    i4 = (i3[end] + Δt):Δt:(i3[end] + Δt + 2*Δt)
-    i5 = (i4[end] + Δt):Δt:T
-
-    M1 = length(i1)
-    M2 = length(i2)
-    M3 = length(i3)
-    M4 = length(i4)
-    M5 = length(i5)
-
-    Iext = [zeros(M1,1); I0 .* ones(M2,1); zeros(M3,1); I1 .* ones(M4,1); zeros(M5,1)]
+    Istim2 = I .* ones(N,1)
+	Istim2[1:5000] .= -0.1
+	Istim2[(N-5000):N] .= -0.1
+	W2, freq2 = HH(Istim2)
     
-    W2 = HH2(Iext)
-
+    mystr2 = "AP frequency: $(freq) Hz" # This is a string for the graph legend
+	
 	# Plotting instructions ------------------------------------------------------		
 	plot(time, W2, 
-		label="V(t)", 
+		label="Numerical solution", 
 		color = :black,
 		linewidth = 3,
 		#leg = :false
-		title = mystr);   # Numerical sol. 
+		title = mystr2);   # Numerical sol. 
 
-	plot!(time, Iext, 
-		label="Iext(t)", 
+	plot!(time, 10*Istim2./I, 
+		label="Input current", 
 		color = :red,
-		linewidth = 3,
-		leg = :true);   # Analytical sol. of a RC compartment 
+		linewidth = 3);   # Stimulus waveform
 
-	xlims!((0, 50))
- 	ylims!((-100,50))
+	xlims!((20, 300))
+ 	ylims!((-120,30))
 
     xlabel!("time [ms]")                # Label for the horizontal axis
     ylabel!("Membrane potential [mV]")  # Label for the vertical axis
-
-
+	
 end
-
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1169,12 +1162,10 @@ version = "0.9.1+5"
 # ╟─e5249e68-3cb5-11ec-0331-9bbff26e113c
 # ╟─2107ad84-f839-4e7b-8a81-7a59a3e189b7
 # ╟─b3200f5a-ab7a-4503-bf4c-f92ec6ce31a8
+# ╟─295d851f-61b3-43a7-86d3-42f3f72db666
 # ╟─dc8f4054-2c94-4373-8728-9f84291841f4
 # ╟─3e535bd3-b58c-4dfd-9749-070699aee0c3
 # ╟─8f6fcc70-5d00-41df-9c8b-8550375d8be3
-# ╟─78194388-b1e3-4c8b-879e-388cb2cdd486
-# ╟─1335790e-5e5d-450d-8551-b2314e1436ce
-# ╟─db58af96-8fd8-4c24-b788-34f8ceb8e733
-# ╟─e9bc7a10-ad8d-4acb-8099-f2e4f2c77d67
+# ╟─839a5028-e70e-4144-9f15-b89b72f59d87
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
