@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.16.4
+# v0.17.1
 
 using Markdown
 using InteractiveUtils
@@ -7,8 +7,9 @@ using InteractiveUtils
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
     quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
 end
@@ -17,6 +18,14 @@ end
 begin
 	using Plots, PlutoUI
 		plotly();
+
+html"""
+<style>
+input[type*="range"] {
+	width: 50%;
+}
+</style>
+"""
 end
 
 # ╔═╡ e5249e68-3cb5-11ec-0331-9bbff26e113c
@@ -38,9 +47,8 @@ We explore interactively what happens to the membrane potential for increasing v
 """
 
 # ╔═╡ b3200f5a-ab7a-4503-bf4c-f92ec6ce31a8
-md""" ### Play with the amplitude of the external current $I$
-
-I = $(@bind I Slider(-0.18:0.01:0.5, default=-0.135, show_value=true))"""
+md""" ### Play with the amplitude of the external current $I$	
+	I = $(@bind I Slider(-0.18:0.01:1.5, default=-0.135, show_value=true))"""
 
 # ╔═╡ dc8f4054-2c94-4373-8728-9f84291841f4
 md"""
@@ -634,9 +642,9 @@ uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 
 [[Libffi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "761a393aeccd6aa92ec3515e428c26bf99575b3b"
+git-tree-sha1 = "0b4a5d71f3e5200a7dff793393e09dfc2d874290"
 uuid = "e9f186c6-92d2-5b65-8a66-fee21dc1b490"
-version = "3.2.2+0"
+version = "3.2.2+1"
 
 [[Libgcrypt_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgpg_error_jll", "Pkg"]

@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.16.4
+# v0.17.1
 
 using Markdown
 using InteractiveUtils
@@ -7,8 +7,9 @@ using InteractiveUtils
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
     quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
 end
@@ -17,6 +18,13 @@ end
 begin
 	using Plots, PlutoUI
 		plotly();
+html"""
+<style>
+input[type*="range"] {
+	width: 50%;
+}
+</style>
+"""
 end
 
 # ╔═╡ cb35e5b8-3cba-11ec-18ac-97f76782ee92
@@ -48,7 +56,7 @@ begin
  E     = -70.  # Membrane resting potential [mV]
  θ     = -50.  # Excitability threshold [mV]
  Vmax  = 10.   # Peak voltage during a spike [mV] - purely aesthetical reasons!
- Tarp  = 2.    # Absolute refractory period [ms]
+ Tarp  = 10.    # Absolute refractory period [ms]
 	
  # Initalisation of the data structures
  time = 0:Δt:T;      # Array containing the "current time" [ms]
@@ -172,7 +180,6 @@ T = $(@bind T0 Slider(Δt:Δt:50, default=30, show_value=true))
 
 # ╔═╡ 63540686-ce9d-4c9d-9047-2a914f4a4c2a
 begin
-	
 	delay = 10.
 
     i1 = 0:Δt:delay
@@ -565,9 +572,9 @@ uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 
 [[Libffi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "761a393aeccd6aa92ec3515e428c26bf99575b3b"
+git-tree-sha1 = "0b4a5d71f3e5200a7dff793393e09dfc2d874290"
 uuid = "e9f186c6-92d2-5b65-8a66-fee21dc1b490"
-version = "3.2.2+0"
+version = "3.2.2+1"
 
 [[Libgcrypt_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgpg_error_jll", "Pkg"]
@@ -1108,6 +1115,6 @@ version = "0.9.1+5"
 # ╟─dc0256c3-4284-40f6-bd2e-d87cae7f094d
 # ╟─9a5e096e-9058-4965-9acc-4c4e767e4a4a
 # ╟─1227ef1d-8a08-47bf-8dc1-65a942735fbb
-# ╠═63540686-ce9d-4c9d-9047-2a914f4a4c2a
+# ╟─63540686-ce9d-4c9d-9047-2a914f4a4c2a
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

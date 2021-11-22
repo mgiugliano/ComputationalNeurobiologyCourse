@@ -1,13 +1,30 @@
 ### A Pluto.jl notebook ###
-# v0.16.4
+# v0.17.1
 
 using Markdown
 using InteractiveUtils
+
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
 
 # ╔═╡ 5e27286d-8cc5-4009-8c7b-fcfe2bb61d53
 begin
 	using Plots, PlutoUI, DSP
 		plotly();
+html"""
+<style>
+input[type*="range"] {
+	width: 50%;
+}
+</style>
+"""
 end
 
 # ╔═╡ 7178a1fb-9f58-43e0-a089-246e32138948
@@ -304,18 +321,26 @@ where $\Delta_k = t_{k+1} - t_k$ is the interval elapsed from the previous occur
 Let's now implement this last update rule numerically and test it.
 """
 
+# ╔═╡ 2e386729-6421-425b-a2dd-20110071af97
+md""" ### Play with (presyn.) spike frequency $f$ and time-scale of recovery from depression
+
+f = $(@bind f Slider(32.5:2.5:100, default=32.5, show_value=true))"""
+
+# ╔═╡ 25662701-ff3b-4ea0-8ed7-d0d1f3d362a2
+md"""τD = $(@bind τD2 Slider(0:10:500, default=0, show_value=true))"""
+
 # ╔═╡ f16897f7-49d0-4ae6-a33d-bd4e8ae856e2
 begin
 # Initialization of the parameters and state variables -----------------------------
 r2  = 1.    # Initialization...
-M  = 10     # Number of activation events
-f  = 25.    # (regular) frequency of the activation events, Hz
+M  = 15     # Number of activation events
+#f  = 25.    # (regular) frequency of the activation events, Hz
 ISI= 1000. / f# inter-event interval, ms
 
 A  = 1.     # Maximal synaptic efficacy
 U  = 0.8    # U parameter of short-term depressing synapses
 τi2 = 5.     # Inactivation time constant, of individual EPSC, ms
-τD2 = 200.   # Recovery time constant from depression, ms
+#τD2 = 200.   # Recovery time constant from depression, ms
 #τF2 = 500.   # Recovery time constant from facilitation, ms
 
 delay  = 10 * τi2
@@ -338,16 +363,19 @@ end # for
 
 # Let's turn this into a trace in time --------------------------------------------------------------
 
-TT  = maximum(events) + 10 * τi # lifetime of the simulation, ms
-NN  = Int64(TT/Δt)               # corresponding number of steps
+TT  = 500.
+#TT  = maximum(events) + 10 * τi # lifetime of the simulation, ms
+NN  = Int64(ceil(TT/Δt))               # corresponding number of steps
 tt  = (1:NN)*Δt    # time axis, ms
+#tt  = Δt:Δt:TT
+#NN  = length(tt)
 
 y  = zeros(NN,1)  # allocated as an array filled of zeros
 x  = zeros(NN,1)  # allocated as an array filled of zeros
 z = zeros(NN,1)  # allocated as an array filled of zeros
 
 for k=1:M
- i    = Int64(events[k]/Δt)
+ i    = Int64(ceil(events[k]/Δt))
  z[i] = out[k]
  x[i] = U
 end
@@ -372,15 +400,12 @@ ppp2 = plot(tt, y,
 
 plot(ppp1, ppp2, layout =  (2, 1))
 
-xlims!((0, T))
+xlims!((0, TT))
 ylims!((-0.1,1.1))
 
 #xlabel!("time [ms]")                # Label for the horizontal axis
 end
 
-
-
-# ╔═╡ 97b64ce4-67ec-4ff7-aeb9-d903d7c86b7c
 
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -785,9 +810,9 @@ uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 
 [[Libffi_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "761a393aeccd6aa92ec3515e428c26bf99575b3b"
+git-tree-sha1 = "0b4a5d71f3e5200a7dff793393e09dfc2d874290"
 uuid = "e9f186c6-92d2-5b65-8a66-fee21dc1b490"
-version = "3.2.2+0"
+version = "3.2.2+1"
 
 [[Libgcrypt_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgpg_error_jll", "Pkg"]
@@ -1367,13 +1392,14 @@ version = "0.9.1+5"
 
 # ╔═╡ Cell order:
 # ╟─7178a1fb-9f58-43e0-a089-246e32138948
-# ╠═5e27286d-8cc5-4009-8c7b-fcfe2bb61d53
+# ╟─5e27286d-8cc5-4009-8c7b-fcfe2bb61d53
 # ╟─dc36fddc-ab6f-45fe-9dc7-72dff97846f4
 # ╟─9da5cb00-7846-458f-889d-efa9dfc99d9e
 # ╟─b5b91c4d-8697-4b7c-9f5c-c205ad7d818e
 # ╟─9bcd7792-db78-4f35-aa68-374989b13043
 # ╟─aeb79299-aaf7-4bdc-9da6-a450b93a1f07
+# ╟─2e386729-6421-425b-a2dd-20110071af97
+# ╟─25662701-ff3b-4ea0-8ed7-d0d1f3d362a2
 # ╟─f16897f7-49d0-4ae6-a33d-bd4e8ae856e2
-# ╠═97b64ce4-67ec-4ff7-aeb9-d903d7c86b7c
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
